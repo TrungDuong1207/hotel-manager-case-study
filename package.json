@@ -1,0 +1,25 @@
+{
+  "name": "hotel-mg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --inspect server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrungDuong1207/hotel-manager-case-study.git"
+  },
+  "author": "Trung Duong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrungDuong1207/hotel-manager-case-study/issues"
+  },
+  "homepage": "https://github.com/TrungDuong1207/hotel-manager-case-study#readme",
+  "dependencies": {
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20",
+    "qs": "^6.11.0"
+  }
+}
