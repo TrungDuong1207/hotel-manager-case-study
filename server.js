@@ -1,10 +1,11 @@
 const http = require("http");
 const url = require("url");
-const PORT = 3000;
+const PORT = 8080;
 const PATH = __dirname + "\\views";
 const HomeController = require("./src/controllers/home.controller");
-const fs= require("fs");
-
+const AuthController = require("./src/controllers/auth.controller");
+const ManagerController = require("./src/controllers/manager.controller");
+const fs = require("fs");
 const server = http.createServer((req, res) => {
     const urlParse = url.parse(req.url);
     const urlPathName = urlParse.pathname;
@@ -34,12 +35,50 @@ const server = http.createServer((req, res) => {
             case "/":
                 HomeController.showHomepage(req, res);
                 break;
+            case "/manager":
+                ManagerController.showListRoom(req, res);
+                break;
+            case "/login":
+                if (req.method === "GET") {
+                    AuthController.showLoginPage(req, res);
+                } else {
+                    AuthController.login(req, res);
+                }
+                break;
+            case "/logout":
+                AuthController.logOut(req, res);
+                HomeController.showHomepage(req, res);
+                break;
+            case "/add":
+                if (req.method === "GET") {
+                    ManagerController.showAddPage(req, res);
+                } else {
+                    ManagerController.addRoom(req, res);
+                }
+                break;
+            case "/delete":
+                if (req.method === "GET") {
+                    ManagerController.showDeletePage(req, res, urlParse);
+                } else {
+                    ManagerController.deleteRoom(req, res, urlParse);
+                }
+                
+                break;
+            case "/edit":
+                if (req.method === "GET") {
+                    ManagerController.showEditPage(req, res, urlParse);
+                } else {
+                    ManagerController.editRoom(req, res);
+                }
+                break;
+            default:
+                res.write("404 Not found");
+                res.end();
         }
-
-
     }
 });
 
-server.listen(3000, "localhost", () => {
-    console.log("listen localhost on port" + PORT);
+server.listen(PORT, "localhost", () => {
+    console.log("listen localhost on port " + PORT);
 })
+

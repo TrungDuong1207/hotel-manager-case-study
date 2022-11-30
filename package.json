@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/TrungDuong1207/hotel-manager-case-study#readme",
   "dependencies": {
+    "formidable": "^2.0.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.20",
     "qs": "^6.11.0"
