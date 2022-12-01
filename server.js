@@ -2,34 +2,21 @@ const http = require("http");
 const url = require("url");
 const PORT = 8080;
 const PATH = __dirname + "\\views";
+const BaseController = require("./handler/base.controller");
 const HomeController = require("./src/controllers/home.controller");
 const AuthController = require("./src/controllers/auth.controller");
 const ManagerController = require("./src/controllers/manager.controller");
-const fs = require("fs");
 const server = http.createServer((req, res) => {
     const urlParse = url.parse(req.url);
     const urlPathName = urlParse.pathname;
     let path = urlParse.path;
-    let mimeTypes = {
-        webp: "image/webp",
-        jpg: "images/jpg",
-        png: "images/png",
-        jpeg: "images/jpeg",
-        js: "text/javascript",
-        css: "text/css",
-        svg: "image/svg+xml",
-        ttf: "font/ttf",
-        woff: "font/woff",
-        woff2: "font/woff2",
-        eot: "application/vnd.ms-fontobject",
-    };
+
     const filesDefences = path.match(
         /\.js|\.css|\.png|\.svg|\.jpg|\.ttf|\.woff|\.woff2|\.eot|\.webp|\.jpeg/
     );
     if (filesDefences) {
-        const extension = mimeTypes[filesDefences[0].toString().split(".")[1]];
-        res.writeHead(200, { "Content-Type": extension });
-        fs.createReadStream(PATH + req.url).pipe(res);
+        console.log("pathname" + urlPathName);
+        BaseController.readImage(PATH, req, res, filesDefences);
     } else {
         switch (urlPathName) {
             case "/":
@@ -56,19 +43,39 @@ const server = http.createServer((req, res) => {
                     ManagerController.addRoom(req, res);
                 }
                 break;
-            case "/delete":
+            case "/manager/delete":
                 if (req.method === "GET") {
                     ManagerController.showDeletePage(req, res, urlParse);
                 } else {
                     ManagerController.deleteRoom(req, res, urlParse);
                 }
-                
+
                 break;
-            case "/edit":
+            case "/manager/edit":
                 if (req.method === "GET") {
                     ManagerController.showEditPage(req, res, urlParse);
                 } else {
                     ManagerController.editRoom(req, res);
+                }
+                break;
+            case "/manager/rented":
+                ManagerController.showRentedRoom(req, res);
+                break;
+            case "/manager/empty":
+                ManagerController.showEmptyRoom(req, res);
+                break;
+            case "/manager/rented/checkout":
+                if (req.method === "GET") {
+                    ManagerController.showCheckOutRoom(req, res, urlParse);
+                } else {
+                    ManagerController.checkOutRoom(req, res);
+                }
+                break;
+            case "/manager/empty/booking":
+                if (req.method === "GET") {
+                    ManagerController.showbookingRoom(req, res, urlParse);
+                } else {
+                    ManagerController.bookingRoom(req, res);
                 }
                 break;
             default:

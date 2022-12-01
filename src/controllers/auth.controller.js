@@ -6,7 +6,7 @@ class AuthController {
     static async showLoginPage(req, res) {
         let cookie = req.headers.cookie;
         let sessionID = qs.parse(cookie).uId;
-        let dataFormLogin = await BaseController.getTemplate('./views/login.html');
+        let dataFormLogin = await BaseController.getTemplate('./views/home/login.html');
         let file = "sessions/" + sessionID + ".json";
         console.log(file);
         if (sessionID) {
@@ -28,8 +28,8 @@ class AuthController {
                 }
             } catch {
                 res.writeHead(200, { "Content-type": "text/html" });
-            res.write(dataFormLogin);
-            res.end();
+                res.write(dataFormLogin);
+                res.end();
             }
         } else {
             res.writeHead(200, { "Content-type": "text/html" });
@@ -79,12 +79,15 @@ class AuthController {
     }
 
     static async logOut(req, res) {
-        let cookie = req.headers.cookie;
-        let sessionID = qs.parse(cookie).uId;
-        console.log(sessionID);
-
-        await BaseController.unlinkSession(__dirname + "..\\..\\..\\sessions\\" + sessionID + ".json");
-
+        try {
+            let cookie = req.headers.cookie;
+            let sessionID = qs.parse(cookie).uId;
+            console.log(sessionID);
+            await BaseController.unlinkSession(__dirname + "..\\..\\..\\sessions\\" + sessionID + ".json");
+        } catch (err) {
+            res.writeHead(301, { Location: '/login' })
+            res.end();
+        }
     }
 }
 

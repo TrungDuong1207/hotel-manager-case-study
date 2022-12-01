@@ -25,6 +25,28 @@ class BaseController {
             })
         })
     }
+
+    static async readImage(PATH, req, res, filesDefences) {
+        let mimeTypes = {
+            webp: "image/webp",
+            jpg: "images/jpg",
+            png: "images/png",
+            jpeg: "images/jpeg",
+            js: "text/javascript",
+            css: "text/css",
+            svg: "image/svg+xml",
+            ttf: "font/ttf",
+            woff: "font/woff",
+            woff2: "font/woff2",
+            eot: "application/vnd.ms-fontobject",
+        };
+        const extension = mimeTypes[filesDefences[0].toString().split(".")[1]];
+        res.writeHead(200, { "Content-Type": extension });
+        // let dataImg = await BaseController.getTemplate(PATH + req.url);
+        // res.write(dataImg);
+        // res.end();
+        fs.createReadStream(PATH + req.url).pipe(res);
+    }
 }
 
 module.exports = BaseController;
