@@ -18,12 +18,16 @@
       <form action="/login" method="post">
         <h2 class="text-center">LOG IN</h2>
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+          <label for="exampleInputEmail1" class="form-label">Email address<span style="color: red;" id="errorEmail">
+              (*)</span></label>
+          <input type="text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            onblur="checkEmail()" />
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" name="password" class="form-control" id="exampleInputPassword1" />
+          <label for="exampleInputPassword1" class="form-label">Password<span style="color: red;" id="errorPassword">
+              (*)</span></label>
+          <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+            onblur="checkPassword()" />
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1" />
@@ -33,7 +37,36 @@
       </form>
     </div>
   </div>
+  <script>
+    function checkEmail() {
+      var email = document.getElementById('exampleInputEmail1').value;
+      var errorEmail = document.getElementById('errorEmail');
+      var regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
+      if (email == "" || email == null) {
+        errorEmail.innerHTML = " Email cannot be blank!"
+      } else if (!regexEmail.test(email)) {
+        errorEmail.innerHTML = " Invalid email!"
+      } else {
+        errorEmail.innerHTML = ""
+        return email;
+      }
+    }
+    function checkPassword() {
+      var password = document.getElementById('exampleInputPassword1').value;
+      var errorPassword = document.getElementById('errorPassword');
+      var regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/
+
+      if (password == "" || password == null) {
+        errorPassword.innerHTML = " Password cannot be blank!"
+      } else if (!regexPassword.test(password)) {
+        errorPassword.innerHTML = " Password at least 6 characters (1 character is alphanumeric)!"
+      } else {
+        errorPassword.innerHTML = ""
+        return password;
+      }
+    }
+  </script>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

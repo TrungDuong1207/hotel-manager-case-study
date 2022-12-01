@@ -75,7 +75,7 @@ class ManagerController {
                             FROM rooms r JOIN categoryroom c ON r.categoryRoomId = c.categoryRoomId 
                             WHERE r.roomId = ${idDelete};`;
         let rooms = await BaseController.querySQL(sqlSelectRoom);
-        console.log(rooms);
+        // console.log(rooms);
         deleteHTML = deleteHTML.replace("{name}", rooms[0].roomId);
         deleteHTML = deleteHTML.replace("{description}", rooms[0].descriptionRoom);
         deleteHTML = deleteHTML.replace("{cate}", rooms[0].categoryName);

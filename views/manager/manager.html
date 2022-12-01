@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav me-auto mt-2 mt-lg-0 ms-3">
           <li class="nav-item">
-            <a class="nav-link active" href="#" aria-current="page">Home<span
+            <a class="nav-link active" href="/" aria-current="page">Home<span
                 class="visually-hidden">(current)</span></a>
           </li>
           <li class="nav-item">
@@ -32,8 +32,15 @@
           </li>
 
         </ul>
-        <a class="btn btn-outline-success my-2 my-sm-0 btn-warning me-3" href="/logout">Log Out</a>
-
+        <div class="dropdown me-3">
+          <a class="btn btn-warning dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Admin
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/users">Information Admin</a></li>
+            <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+          </ul>
+        </div>      
       </div>
     </nav>
   </header>

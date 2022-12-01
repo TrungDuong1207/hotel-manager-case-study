@@ -6,6 +6,7 @@ const BaseController = require("./handler/base.controller");
 const HomeController = require("./src/controllers/home.controller");
 const AuthController = require("./src/controllers/auth.controller");
 const ManagerController = require("./src/controllers/manager.controller");
+const UserController = require("./src/controllers/user.controller");
 const server = http.createServer((req, res) => {
     const urlParse = url.parse(req.url);
     const urlPathName = urlParse.pathname;
@@ -21,6 +22,19 @@ const server = http.createServer((req, res) => {
         switch (urlPathName) {
             case "/":
                 HomeController.showHomepage(req, res);
+                break;
+            case "/detail":
+                HomeController.showDetail(req, res, urlParse);
+                break;
+            case "/users":
+                UserController.showListUser(req, res);
+                break;
+            case "/user/edit":
+                if (req.method === "GET") {
+                    UserController.showEditUser(req, res, urlParse);
+                } else {
+                    UserController.updateUser(req, res);
+                }
                 break;
             case "/manager":
                 ManagerController.showListRoom(req, res);
@@ -49,7 +63,6 @@ const server = http.createServer((req, res) => {
                 } else {
                     ManagerController.deleteRoom(req, res, urlParse);
                 }
-
                 break;
             case "/manager/edit":
                 if (req.method === "GET") {

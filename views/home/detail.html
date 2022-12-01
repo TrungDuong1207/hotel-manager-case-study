@@ -30,45 +30,24 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/manager">Manager</a>
-                    </li>
+
                 </ul>
-                <div class="dropdown me-3">
-                    <a class="btn btn-warning dropdown-toggle " type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Admin
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/users">Information Admin</a></li>
-                        <li><a class="dropdown-item" href="/logout">Log Out</a></li>
-                    </ul>
-                </div>
+                <a class="btn btn-outline-success my-2 my-sm-0 btn-warning me-3" href="/login">Login</a>
             </div>
         </nav>
     </header>
     <main>
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr class="bg-dark text-white">
-                    <th>STT</th>
-                    <th>Room Code</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Price (VND/1h)</th>
-                    <th>Time In</th>
-                    <th>Time Out</th>
-                    <th>Total Money</th>
-                    <th>Check out</th>
-                </tr>
-            </thead>
-            <tbody>
-                {rented-list}
-            </tbody>
-        </table>
+        <div class="container">
+            <div class="fw-bold">NAME ROOM: {name}</div>
+            <hr>
+            <div><b>Description:</b> {description}</div>
+            <div><b>Category:</b> {cate}</div>
+            <div><b>Price (VND/1h):</b> {price}</div>
+            <img style="width: 100%; height: 450px;" src="./{img-detail}" alt="">
+        </div>
     </main>
     <footer>
-        <!-- place footer here -->
+
     </footer>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

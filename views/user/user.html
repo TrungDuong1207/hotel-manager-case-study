@@ -44,28 +44,32 @@
                         <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                     </ul>
                 </div>
+
             </div>
         </nav>
     </header>
     <main>
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr class="bg-dark text-white">
-                    <th>STT</th>
-                    <th>Room Code</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Price (VND/1h)</th>
-                    <th>Time In</th>
-                    <th>Time Out</th>
-                    <th>Total Money</th>
-                    <th>Check out</th>
-                </tr>
-            </thead>
-            <tbody>
-                {rented-list}
-            </tbody>
-        </table>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="bg-dark text-white">
+                                <th>STT</th>
+                                <th>Name</th>
+                                <th>Date of birth</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Update</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users-list}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <!-- place footer here -->
